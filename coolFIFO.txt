@@ -1,0 +1,57 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity fifo is
+    Port (
+        din   : in  STD_LOGIC_VECTOR(3 downto 0);
+        dout  : out STD_LOGIC_VECTOR(3 downto 0);
+        rw    : in  STD_LOGIC;           -- '0' = write, '1' = read
+        rst   : in  STD_LOGIC;           -- synchronous active-high reset
+        clk   : in  STD_LOGIC;
+        full  : out STD_LOGIC;
+        empty : out STD_LOGIC
+    );
+end fifo;
+
+architecture Behavioral of fifo is
+    type mem_t is array (0 to 3) of std_logic_vector(3 downto 0);
+    signal mem     : mem_t := (others => (others => '0'));
+    signal wr_ptr  : unsigned(1 downto 0) := (others => '0');
+    signal rd_ptr  : unsigned(1 downto 0) := (others => '0');
+    signal count   : unsigned(2 downto 0) := (others => '0'); -- 0..4
+    signal dout_reg: std_logic_vector(3 downto 0) := (others => '0');
+begin
+
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if rst = '1' then
+                wr_ptr   <= (others => '0');
+                rd_ptr   <= (others => '0');
+                count    <= (others => '0');
+                mem      <= (others => (others => '0'));
+                dout_reg <= (others => '0');
+            else
+                -- Write when rw='0' and not full
+                if (rw = '0') and (count < 4) then
+                    mem(to_integer(wr_ptr)) <= din;
+                    wr_ptr <= wr_ptr + 1;
+                    count <= count + 1;
+                end if;
+
+                -- Read when rw='1' and not empty
+                if (rw = '1') and (count > 0) then
+                    dout_reg <= mem(to_integer(rd_ptr));
+                    rd_ptr <= rd_ptr + 1;
+                    count <= count - 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    dout  <= dout_reg;
+    full  <= '1' when count = 4 else '0';
+    empty <= '1' when count = 0 else '0';
+
+end Behavioral;
