@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Area Calculator (Triangle / Rectangle / Circle)</title>
+  <style type="text/css">
+    body { font-family: Arial, sans-serif; padding: 18px; }
+    label { display:block; margin-top:10px; }
+    .box { margin-bottom:18px; padding:10px; border:1px solid #ddd; border-radius:6px; max-width:420px; }
+    .result { margin-top:8px; font-weight:600; }
+    button { margin-top:8px; padding:6px 10px; }
+  </style>
+</head>
+<body>
+  <h1>Area Calculator</h1>
+  <p>Enter values and click Calculate. Results appear on the page and in the browser console.</p>
+
+  <div class="box" id="triangleBox">
+    <h3>Triangle (area = 0.5 × base × height)</h3>
+    <label>Base: <input id="triBase" type="number" step="any" min="0" value="10" /></label>
+    <label>Height: <input id="triHeight" type="number" step="any" min="0" value="5" /></label>
+    <button type="button" onclick="calcTriangle()">Calculate Triangle Area</button>
+    <div class="result" id="triResult">Result: —</div>
+  </div>
+
+  <div class="box" id="rectBox">
+    <h3>Rectangle (area = length × width)</h3>
+    <label>Length: <input id="rectLen" type="number" step="any" min="0" value="8" /></label>
+    <label>Width: <input id="rectWid" type="number" step="any" min="0" value="4" /></label>
+    <button type="button" onclick="calcRectangle()">Calculate Rectangle Area</button>
+    <div class="result" id="rectResult">Result: —</div>
+  </div>
+
+  <div class="box" id="circleBox">
+    <h3>Circle (area = π × r²)</h3>
+    <label>Radius: <input id="cirRadius" type="number" step="any" min="0" value="3" /></label>
+    <button type="button" onclick="calcCircle()">Calculate Circle Area</button>
+    <div class="result" id="cirResult">Result: —</div>
+  </div>
+
+  <script type="text/javascript">
+  // <![CDATA[
+    /**
+     * Utility: format number to max 6 decimal places (trims trailing zeros)
+     * returns string
+     */
+    function formatNumber(n) {
+      if (!isFinite(n)) return String(n);
+      return parseFloat(n.toFixed(6)).toString();
+    }
+
+    // Triangle: 0.5 * base * height
+    function areaTriangle(base, height) {
+      return 0.5 * base * height;
+    }
+
+    // Rectangle: length * width
+    function areaRectangle(length, width) {
+      return length * width;
+    }
+
+    // Circle: Math.PI * r * r
+    function areaCircle(radius) {
+      return Math.PI * radius * radius;
+    }
+
+    // Handlers called from buttons: read inputs, compute, show result and log to console
+    function calcTriangle() {
+      var base = parseFloat(document.getElementById('triBase').value) || 0;
+      var height = parseFloat(document.getElementById('triHeight').value) || 0;
+
+      var area = areaTriangle(base, height);
+      var out = 'Triangle area (0.5 × ' + base + ' × ' + height + ') = ' + formatNumber(area);
+      document.getElementById('triResult').textContent = 'Result: ' + out;
+      console.log(out);
+    }
+
+    function calcRectangle() {
+      var length = parseFloat(document.getElementById('rectLen').value) || 0;
+      var width  = parseFloat(document.getElementById('rectWid').value) || 0;
+
+      var area = areaRectangle(length, width);
+      var out = 'Rectangle area (' + length + ' × ' + width + ') = ' + formatNumber(area);
+      document.getElementById('rectResult').textContent = 'Result: ' + out;
+      console.log(out);
+    }
+
+    function calcCircle() {
+      var r = parseFloat(document.getElementById('cirRadius').value) || 0;
+
+      var area = areaCircle(r);
+      var out = 'Circle area (π × ' + r + '²) = ' + formatNumber(area);
+      document.getElementById('cirResult').textContent = 'Result: ' + out;
+      console.log(out);
+    }
+
+    // Make functions available on window so you can call them directly from console if needed:
+    window.areaTriangle = areaTriangle;
+    window.areaRectangle = areaRectangle;
+    window.areaCircle = areaCircle;
+    window.calcTriangle = calcTriangle;
+    window.calcRectangle = calcRectangle;
+    window.calcCircle = calcCircle;
+  // ]]>
+  </script>
+</body>
+</html>

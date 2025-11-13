@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Countdown Timer</title>
+
+<script>
+function startTimer() {
+    let time = document.getElementById("sec").value;
+
+    if (time === "" || isNaN(time)) {
+        alert("Enter valid seconds");
+        return;
+    }
+
+    let x = setInterval(function() {
+        document.getElementById("display").innerText = time;
+        time--;
+
+        if (time < 0) {
+            clearInterval(x);
+            document.getElementById("display").innerHTML = "Time Up!";
+        }
+    }, 1000);
+}
+</script>
+
+</head>
+<body>
+
+<h3>Countdown Timer</h3>
+
+Enter Seconds: <input id="sec"><br><br>
+
+<button onclick="startTimer()">Start</button>
+
+<h2 id="display"></h2>
+
+</body>
+</html>

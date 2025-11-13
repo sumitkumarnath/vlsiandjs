@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Compare Strings</title>
+</head>
+<body>
+    <h2>Compare Two Strings</h2>
+
+    <label>String 1: <input type="text" id="s1" /></label><br />
+    <label>String 2: <input type="text" id="s2" /></label><br />
+
+    <button type="button" onclick="compareStrings()">Compare</button>
+
+    <pre id="res">Results will appear here...</pre>
+
+<script type="text/javascript">
+// <![CDATA[
+function compareStrings() {
+    var a = document.getElementById("s1").value;
+    var b = document.getElementById("s2").value;
+
+    var output = "";
+
+    // 1. Simple equality
+    output += "Direct Compare (==): " + (a == b) + "\n";
+
+    // 2. Strict equality
+    output += "Strict Compare (===): " + (a === b) + "\n";
+
+    // 3. Case-insensitive compare
+    output += "Case-Insensitive: " + (a.toLowerCase() === b.toLowerCase()) + "\n";
+
+    // 4. Locale compare
+    output += "Locale Compare: " + a.localeCompare(b) + "\n";
+
+    document.getElementById("res").textContent = output;
+    console.log(output);
+}
+// ]]>
+</script>
+</body>
+</html>

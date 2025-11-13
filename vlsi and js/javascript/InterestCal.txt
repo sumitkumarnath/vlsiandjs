@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Interest Calculator</title>
+
+    <script type="text/javascript">
+        function calculateInterest() {
+            var p = document.getElementById("principal").value;
+            var r = document.getElementById("rate").value;
+            var t = document.getElementById("time").value;
+
+            if (p === "" || r === "" || t === "") {
+                alert("Please enter all input values!");
+                return;
+            }
+
+            p = parseFloat(p);
+            r = parseFloat(r);
+            t = parseFloat(t);
+
+            if (p <= 0 || r <= 0 || t <= 0) {
+                alert("Values must be greater than 0!");
+                return;
+            }
+
+            // Simple Interest
+            var si = (p * r * t) / 100;
+
+            // Compound Interest : A = P(1 + r/100)^t
+            var amount = p * Math.pow((1 + r / 100), t);
+            var ci = amount - p;
+
+            document.getElementById("si").value = si.toFixed(2);
+            document.getElementById("ci").value = ci.toFixed(2);
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Simple & Compound Interest Calculator</h2>
+
+    Principal Amount: <input type="text" id="principal"/><br/><br/>
+    Rate of Interest (% per year): <input type="text" id="rate"/><br/><br/>
+    Time (years): <input type="text" id="time"/><br/><br/>
+
+    <button onclick="calculateInterest()">Calculate</button>
+
+    <br/><br/>
+
+    Simple Interest: <input type="text" id="si" readonly/><br/><br/>
+    Compound Interest: <input type="text" id="ci" readonly/>
+
+</body>
+</html>

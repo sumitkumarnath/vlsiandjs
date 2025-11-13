@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Number Guessing Game</title>
+
+    <script type="text/javascript">
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var attempts = 0;
+
+        function checkGuess() {
+            var guess = document.getElementById("guess").value;
+
+            if (guess === "") {
+                alert("Enter a number!");
+                return;
+            }
+
+            guess = parseInt(guess);
+
+            if (guess < 1 || guess > 100) {
+                alert("Guess must be between 1 and 100!");
+                return;
+            }
+
+            attempts++;
+
+            if (guess === randomNumber) {
+                alert("Correct! You guessed it in " + attempts + " attempts.");
+                document.getElementById("result").value = "You WON!";
+            }
+            else if (guess < randomNumber) {
+                document.getElementById("result").value = "Too Low! Try Again.";
+            }
+            else {
+                document.getElementById("result").value = "Too High! Try Again.";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Number Guessing Game (1 to 100)</h2>
+
+    Enter your guess: <input type="text" id="guess"/>
+    <button onclick="checkGuess()">Check</button>
+
+    <br/><br/>
+
+    Result: <input type="text" id="result" readonly/><br/>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Array Operations</title>
+
+<script>
+let arr = [10, 20, 30, 40, 50];
+
+document.write("Original Array: " + arr + "<br><br>");
+
+// 1. Remove specific element (remove 30)
+arr = arr.filter(x => x !== 30);
+document.write("After removing 30: " + arr + "<br><br>");
+
+// 2. Check if array contains a value (check 40)
+let contains = arr.includes(40);
+document.write("Array contains 40: " + contains + "<br><br>");
+
+// 3. Empty the array
+arr = [];
+document.write("Array after emptying: " + arr);
+</script>
+
+</head>
+<body>
+</body>
+</html>
+

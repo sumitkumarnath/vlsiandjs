@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>String Operations</title>
+</head>
+<body>
+    <h2>String Operations</h2>
+
+    <label>Enter a string:
+        <input type="text" id="strInput" />
+    </label>
+    <button type="button" onclick="processString()">Run</button>
+
+    <pre id="result">Results will appear here...</pre>
+
+<script type="text/javascript">
+// <![CDATA[
+function reverseString(str) {
+    return str.split("").reverse().join("");
+}
+
+function replaceCharacters(str) {
+    return str.replace(/a/gi, "@"); // replace a or A with @
+}
+
+function isPalindrome(str) {
+    var cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+    return cleaned === reverseString(cleaned);
+}
+
+function processString() {
+    var text = document.getElementById("strInput").value;
+
+    if (!text) {
+        alert("Enter a string first!");
+        return;
+    }
+
+    var reversed = reverseString(text);
+    var replaced = replaceCharacters(text);
+    var palindrome = isPalindrome(text) ? "Yes" : "No";
+
+    var output =
+        "Original: " + text + "\n" +
+        "Reversed: " + reversed + "\n" +
+        "Replaced (a→@): " + replaced + "\n" +
+        "Palindrome: " + palindrome;
+
+    document.getElementById("result").textContent = output;
+    console.log(output);
+}
+// ]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Countdown Timer</title>
+</head>
+<body>
+    <h2>Countdown Timer</h2>
+
+    <label>Enter seconds:
+        <input type="number" id="seconds" />
+    </label>
+    <button type="button" onclick="startCountdown()">Start</button>
+
+    <h3 id="display">Time: —</h3>
+
+<script type="text/javascript">
+// <![CDATA[
+var timer;
+
+function startCountdown() {
+    var time = parseInt(document.getElementById("seconds").value);
+
+    if (isNaN(time) || time <= 0) {
+        alert("Enter valid seconds");
+        return;
+    }
+
+    document.getElementById("display").textContent = "Time: " + time;
+
+    clearInterval(timer); // reset old timer if running
+
+    timer = setInterval(function () {
+        time--;
+        document.getElementById("display").textContent = "Time: " + time;
+
+        if (time <= 0) {
+            clearInterval(timer);
+            document.getElementById("display").textContent = "Time Up!";
+            alert("Countdown Finished!");
+        }
+    }, 1000);
+}
+// ]]>
+</script>
+</body>
+</html>

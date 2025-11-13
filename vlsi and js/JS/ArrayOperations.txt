@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Array Operations</title>
+</head>
+<body>
+    <h2>Array Operations</h2>
+
+    <p>Initial Array: <span id="arrShow"></span></p>
+
+    <label>Enter value to remove:
+        <input type="text" id="removeVal" />
+    </label>
+    <button type="button" onclick="removeElement()">Remove Element</button><br /><br />
+
+    <label>Enter value to search:
+        <input type="text" id="searchVal" />
+    </label>
+    <button type="button" onclick="searchValue()">Check Value</button><br /><br />
+
+    <button type="button" onclick="emptyArray()">Empty Array</button>
+    <pre id="result"></pre>
+
+<script type="text/javascript">
+// <![CDATA[
+var arr = [10, 20, 30, 40, 50];
+document.getElementById("arrShow").textContent = arr.join(", ");
+
+function removeElement() {
+    var val = document.getElementById("removeVal").value;
+
+    var index = arr.indexOf(Number(val));
+    if (index !== -1) {
+        arr.splice(index, 1);
+        document.getElementById("result").textContent = "Removed " + val + "\nNew Array: " + arr;
+    } else {
+        document.getElementById("result").textContent = val + " not found";
+    }
+    document.getElementById("arrShow").textContent = arr.join(", ");
+}
+
+function searchValue() {
+    var val = document.getElementById("searchVal").value;
+
+    var present = arr.includes(Number(val));
+    document.getElementById("result").textContent = present ? 
+        val + " exists in array" : val + " NOT in array";
+}
+
+function emptyArray() {
+    arr.length = 0; // empties array
+    document.getElementById("result").textContent = "Array emptied!";
+    document.getElementById("arrShow").textContent = arr;
+}
+// ]]>
+</script>
+</body>
+</html>

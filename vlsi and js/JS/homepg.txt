@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home Page</title>
+
+<script>
+function changeBgOver() {
+    document.body.style.backgroundColor = "lightblue";
+}
+
+function changeBgFocus() {
+    document.body.style.backgroundColor = "lightgreen";
+}
+
+function resetBg() {
+    document.body.style.backgroundColor = "white";
+}
+</script>
+
+</head>
+<body>
+
+<h2>Home Page</h2>
+
+<!-- Mouse Over Event -->
+<p onmouseover="changeBgOver()" onmouseout="resetBg()">
+    Move mouse here to change background
+</p>
+
+<!-- Focus Event -->
+<input type="text" placeholder="Click here to change background"
+       onfocus="changeBgFocus()" onblur="resetBg()">
+
+</body>
+</html>

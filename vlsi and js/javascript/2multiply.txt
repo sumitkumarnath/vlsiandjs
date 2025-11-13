@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Multiplication Table</title>
+</head>
+<body>
+    <h2>Multiplication Table Generator</h2>
+
+    <label>Enter a number:
+        <input type="number" id="num" />
+    </label>
+    <button type="button" onclick="generateTable()">Generate</button>
+
+    <pre id="output">Output will appear here...</pre>
+
+<script type="text/javascript">
+// <![CDATA[
+function generateTable() {
+    var n = parseInt(document.getElementById("num").value);
+
+    if (isNaN(n)) {
+        alert("Enter a valid number!");
+        return;
+    }
+
+    var result = "";
+    for (var i = 1; i <= 10; i++) {
+        result += n + " × " + i + " = " + (n * i) + "\n";
+    }
+
+    document.getElementById("output").textContent = result;
+    console.log(result);
+}
+// ]]>
+</script>
+</body>
+</html>

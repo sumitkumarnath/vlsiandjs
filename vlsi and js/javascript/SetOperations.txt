@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Set Operations</title>
+</head>
+<body>
+    <h2>Set Operations</h2>
+
+    <pre id="output">Results will appear here...</pre>
+
+<script type="text/javascript">
+// <![CDATA[
+var setA = new Set([1, 2, 3, 4, 5]);
+var setB = new Set([4, 5, 6, 7]);
+
+// Union: All elements of both sets
+var union = new Set([...setA, ...setB]);
+
+// Intersection: Common elements
+var intersection = new Set([...setA].filter(x => setB.has(x)));
+
+// Difference: A - B
+var difference = new Set([...setA].filter(x => !setB.has(x)));
+
+// Set Difference (B - A)
+var setDifference = new Set([...setB].filter(x => !setA.has(x)));
+
+var result =
+    "Set A: " + [...setA] + "\n" +
+    "Set B: " + [...setB] + "\n\n" +
+    "Union: " + [...union] + "\n" +
+    "Intersection: " + [...intersection] + "\n" +
+    "Difference (A - B): " + [...difference] + "\n" +
+    "Set Difference (B - A): " + [...setDifference];
+
+document.getElementById("output").textContent = result;
+console.log(result);
+// ]]>
+</script>
+</body>
+</html>
